@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Birthday Mohit</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    .box {
+      animation: fadeIn 2s ease forwards;
+    }
+    h1 {
+      font-size: 46px;
+      margin-bottom: 10px;
+      animation: pop 1.5s ease;
+    }
+    p {
+      font-size: 20px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 1.5s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); }
+      100% { transform: scale(1); }
+    }
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: gold;
+      animation: fall 3s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>🎉 Happy 17th Birthday Mohit 🎉</h1>
+  <p>
+    17 years completed — a new journey begins ✨<br><br>
+    You’re not just my brother,<br>
+    you’re my strength and my pride 💙<br><br>
+    May this year bring you success, happiness,<br>
+    and endless smiles 🎂
+  </p>
+</div>
+
+<script>
+  for (let i = 0; i < 40; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(c);
+  }
+</script>
+
+</body>
+</html>
