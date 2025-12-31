@@ -1,76 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Happy Birthday Mohit</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      overflow: hidden;
-    }
-    .box {
-      animation: fadeIn 2s ease forwards;
-    }
-    h1 {
-      font-size: 46px;
-      margin-bottom: 10px;
-      animation: pop 1.5s ease;
-    }
-    p {
-      font-size: 20px;
-      line-height: 1.6;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 1.5s;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    @keyframes pop {
-      0% { transform: scale(0.5); }
-      100% { transform: scale(1); }
-    }
-    .confetti {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: gold;
-      animation: fall 3s linear infinite;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-100px); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Happy Birthday Mohit 🎉</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{
+  margin:0;height:100%;overflow:hidden;
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:#05080f;color:#fff;
+}
+
+/* starfield */
+.stars, .stars2, .stars3{
+  position:absolute;inset:0;background-repeat:repeat;
+  animation:move 120s linear infinite;
+}
+.stars{
+  background-image:radial-gradient(1px 1px at 20px 30px,#fff,transparent);
+  background-size:200px 200px;
+}
+.stars2{
+  background-image:radial-gradient(1px 1px at 50px 80px,#aaa,transparent);
+  background-size:300px 300px;
+  animation-duration:180s;
+}
+.stars3{
+  background-image:radial-gradient(2px 2px at 100px 150px,#ffd700,transparent);
+  background-size:500px 500px;
+  animation-duration:240s;
+}
+@keyframes move{
+  from{transform:translateY(0)}
+  to{transform:translateY(-1000px)}
+}
+
+/* start screen */
+.start{
+  position:absolute;inset:0;z-index:5;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  cursor:pointer;
+}
+.start h2{
+  font-size:28px;letter-spacing:1px;
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}
+
+/* card */
+.wrapper{
+  position:relative;z-index:2;
+  height:100%;display:flex;align-items:center;justify-content:center;
+}
+.card{
+  width:min(90%,520px);
+  padding:40px 30px;
+  border-radius:24px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  box-shadow:
+    0 0 40px rgba(255,215,0,.25),
+    inset 0 0 30px rgba(255,255,255,.08);
+  text-align:center;
+  opacity:0;transform:translateY(30px);
+  transition:1.2s cubic-bezier(.2,.8,.2,1);
+}
+.card.show{opacity:1;transform:none}
+.card::before{
+  content:"";position:absolute;inset:-2px;border-radius:26px;
+  background:linear-gradient(120deg,#ffd700,#4dabf7,#ff6b6b);
+  opacity:.35;filter:blur(18px);z-index:-1;
+}
+
+h1{
+  font-size:46px;margin:0 0 14px;
+  text-shadow:0 0 25px rgba(255,215,0,.9);
+}
+#type{
+  font-size:19px;line-height:1.7;
+  white-space:pre-line;min-height:150px;
+}
+
+/* confetti */
+.confetti{
+  position:absolute;top:-10px;
+  width:8px;height:8px;border-radius:2px;
+  animation:fall 3.5s linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+</style>
 </head>
+
 <body>
 
-<div class="box">
-  <h1>🎉 Happy 17th Birthday Mohit 🎉</h1>
-  <p>
-    17 years completed — a new journey begins ✨<br><br>
-    You’re not just my brother,<br>
-    you’re my strength and my pride 💙<br><br>
-    May this year bring you success, happiness,<br>
-    and endless smiles 🎂
-  </p>
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+
+<div class="start" id="start">
+  <h2>✨ Tap to reveal something special ✨</h2>
+</div>
+
+<div class="wrapper">
+  <div class="card" id="card">
+    <h1>🎉 Happy 17th Birthday Mohit 🎉</h1>
+    <div id="type"></div>
+  </div>
 </div>
 
 <script>
-  for (let i = 0; i < 40; i++) {
-    let c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random() * 100 + "vw";
-    c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+const message =
+`17 years completed — a legendary chapter begins ✨
+
+You’re not just my brother,
+you’re my strength, my pride, my forever support 💙
+
+May this year elevate you,
+sharpen your dreams,
+and take you closer to everything you deserve.
+
+Always rise. Always shine. 🎂`;
+
+const start=document.getElementById("start");
+const card=document.getElementById("card");
+const type=document.getElementById("type");
+
+start.onclick=()=>{
+  start.style.display="none";
+  card.classList.add("show");
+  typeWriter(message,0);
+  confetti();
+};
+
+function typeWriter(t,i){
+  if(i<t.length){
+    type.innerHTML+=t.charAt(i);
+    setTimeout(()=>typeWriter(t,i+1),28);
+  }
+}
+
+function confetti(){
+  const colors=["#ffd700","#ff6b6b","#4dabf7","#51cf66","#845ef7"];
+  for(let i=0;i<80;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=colors[i%colors.length];
+    c.style.animationDuration=(2+Math.random()*3)+"s";
     document.body.appendChild(c);
   }
+}
 </script>
 
 </body>
